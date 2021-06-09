@@ -105,34 +105,12 @@ export default {
         console.log('kk')
         submitForm(qs.stringify(this.myForm)).then(res => {
           console.log(res)
+          alert("成功")
+          this.$router.go(0)
         })
-      },
-      insert(){
-        let flag = 9
-        while(flag--){
-          this.myForm.ID_card = '12345678972054321'+flag
-          this.myForm.guarantor_id = '19061529'
-          this.myForm.guarantor_name = '李品成'
-          this.myForm.cause = '我要学习啊'
-          this.myForm.name = '李哈哈' + flag
-          this.myForm.affected = 0
-          this.myForm.health_code = 1
-          this.myForm.car_num = 123+flag
-          this.myForm.cough = 0
-          this.myForm.unit_info = flag
-          this.myForm.phone = '1395643191'+flag
-          this.myForm.gender = 1;
-          this.myForm.apply_entry = '2021-01-2'+flag+'T16:00:00.000Z'
-          this.myForm.apply_leave = '2021-02-2'+flag+'T16:00:00.000Z'
-          submitForm(qs.stringify(this.myForm)).then(res => {
-            console.log(res)
-          })
-
-        }
       }
   },
   mounted() {
-    this.insert()
   }
 }
 </script>

@@ -100,3 +100,20 @@ export function get (url, params) {
       })
   })
 }
+export function patch (url, params) {
+  return new Promise((resolve, reject) => {
+    axios
+      .patch(url, {
+        params: params
+      })
+      .then(res => {
+          resolve(res.data)
+        },
+        err => {
+          reject(err.data)
+        })
+      .catch(err => {
+        reject(err.data)
+      })
+  })
+}

@@ -1,7 +1,9 @@
 <template>
   <div style="margin-top: 100px">
     <center>
-    <el-input v-model="input" placeholder="请输入您的身份证号，查询是否申请成功" style="width: 80%;" ></el-input>
+      <el-input v-model="name" placeholder="请输入您的姓名" style="width: 80%;" ></el-input>
+
+      <el-input v-model="input" placeholder="请输入您的身份证号，查询是否申请成功" style="width: 80%;margin-top: 30px" ></el-input>
       <el-button type="primary" @click="doSearch()" id="login">点击查询</el-button>
     </center>
   </div>
@@ -9,12 +11,14 @@
 
 <script>
 import {searchOutsiders} from "../apis/api";
+import {get_search_token} from "../apis/api";
+import {mapMutations} from "vuex";
 
 export default {
   name: "search",
   data(){
     return{
-      input: '123',
+      input: '',
       content: '',
       date1: '2016-05-02 21:21:32',
       date2: '2017-09-13 21:18:21',
@@ -27,11 +31,17 @@ export default {
       health_code: '绿',
       unit_info: '杭电',
       cause: '吃饭啊',
-      name: '王小虎'
+      name: ''
     }
   },
   methods: {
+    ...mapMutations(['changeLogin']),
     doSearch(){
+      let i_url = '/apis/outsiders/token'
+      let i_params = {name:this.name,ID_card:this.input}
+      get_search_token(i_url,i_params).then(res =>{
+        this.changeLogin({Authorization: res.data.token})
+      })
       let url = '/apis/outsiders/search?ID_card='+this.input
       let params = {}
       searchOutsiders(url,params).then(res => {

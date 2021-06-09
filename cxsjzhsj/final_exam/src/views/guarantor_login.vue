@@ -53,7 +53,7 @@ export default {
       login(params).then(res => {
         if (res.status === 200) {
           //console.log(res.token)
-          _this.userToken = res.token
+          _this.userToken = res.data.token
           _this.changeLogin({Authorization: _this.userToken})
           _this.$router.push("/guarantee")
         } else {

@@ -39,9 +39,9 @@
       </el-table-column>
       <el-table-column  label="操作" prop="actual_entry">
         <template v-slot="scope">
-          <el-button style="background-color: red;color: white;margin-left: 0px"  v-if="scope.row.actual_entry==='0001-01-01T00:00:00Z'">确认进校</el-button>
-          <el-button style="background-color: #18516c;color: white;margin-left: 0px" v-else>确认离校</el-button>
-
+          <el-button style="background-color: red;color: white;margin-left: 0px"  v-if="scope.row.actual_entry==='0001-01-01T00:00:00Z'" @click="user_entry(scope.row)">确认进校</el-button>
+          <el-button style="background-color: #18516c;color: white;margin-left: 0px" v-else-if="scope.row.actual_leave==='0001-01-01T00:00:00Z'" @click="user_leave(scope.row)">确认离校</el-button>
+          <span v-else>结束</span>
         </template>
 
 
@@ -67,6 +67,8 @@
 import {admin_get} from "../apis/api";
 import {searchOutsiders} from "../apis/api";
 import row from "element-ui/packages/row/src/row";
+import axios from "axios";
+import {update_time} from "../apis/api";
 
 export default {
   name: 'admin_index',
@@ -103,7 +105,6 @@ export default {
         let url = '/apis/outsiders/search?name='+value
         let params = {}
         searchOutsiders(url,params).then(res=>{
-          alert("?")
           this.tableData =  res
         })
       }).catch(() => {
@@ -114,7 +115,7 @@ export default {
       });
     },
     queryByDate(){
-      this.$prompt('请输入您要查询的日期,若为日期区间以’|’ 分割', '提示', {
+      this.$prompt('请输入您要查询的日期,若为日期只需要输入一个即可，若为日期区间以’|’ 分割', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputPlaceholder: '日期格式为yyyy-MM-dd HH:mm:ss'
@@ -123,6 +124,16 @@ export default {
           type: 'success',
           message: '查询' + value +'成功'
         });
+        let str1 = value.substring(0,19)
+        let str2 = value.substring(20,39)
+        if(str2 === ''){
+          str2 = str1
+        }
+        let url = '/apis/outsiders/search?from_apply_enter_time='+str1 +'&to_apply_enter_time='+str2
+        let params = {}
+        searchOutsiders(url,params).then(res=>{
+          this.tableData =  res
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -139,6 +150,22 @@ export default {
         this.tableData = res
 
       })
+    },
+    user_entry(row){
+      let url= '/apis/outsiders/'+row.id +'/actual_entry'
+      let params = {}
+      update_time(url,params).then(res => {
+         this.$router.go(0)
+      })
+
+    },
+    user_leave(row){
+      let url= '/apis/outsiders/'+row.id +'/actual_leave'
+      let params = {}
+      update_time(url,params).then(res => {
+        this.$router.go(0)
+      })
+
     }
   },
   mounted() {
