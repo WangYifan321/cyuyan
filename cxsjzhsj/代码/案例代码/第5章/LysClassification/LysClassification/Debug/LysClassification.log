@@ -1,0 +1,10 @@
+﻿  main.c
+g:\程序设计课程实践\教材修订\西电提交稿\案例代码\第5章\lysclassification\lysclassification\main.c(35): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+g:\程序设计课程实践\教材修订\西电提交稿\案例代码\第5章\lysclassification\lysclassification\main.c(37): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+g:\程序设计课程实践\教材修订\西电提交稿\案例代码\第5章\lysclassification\lysclassification\main.c(38): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(208): note: 参见“fopen”的声明
+g:\程序设计课程实践\教材修订\西电提交稿\案例代码\第5章\lysclassification\lysclassification\main.c(44): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\stdio.h(1197): note: 参见“fscanf”的声明
+  LysClassification.vcxproj -> G:\程序设计课程实践\教材修订\西电提交稿\案例代码\第5章\LysClassification\Debug\LysClassification.exe
